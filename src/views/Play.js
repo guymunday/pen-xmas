@@ -1,11 +1,18 @@
 import React from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
-import { useGameStateContext } from "../utils/gameReducer"
-import { sweetData } from "../utils/sweetData"
-import background from "../assets/pen-xmas-background.jpg"
+import { useCookies } from "react-cookie"
 import SweetButton from "../components/SweetButton"
 import SweetToFind from "../components/SweetToFind"
+import Prize from "../components/Prize"
+import {
+  useGameDispatchContext,
+  useGameStateContext,
+} from "../utils/gameReducer"
+import { sweetData } from "../utils/sweetData"
+import { shuffleArray } from "../utils/shuffleArray"
+import background from "../assets/pen-xmas-background.jpg"
+import santa from "../assets/sweets/sweets-santa.png"
 
 const GameLandscapeStyles = styled(motion.div)`
   width: 100%;
@@ -32,13 +39,26 @@ const GameLandscapeStyles = styled(motion.div)`
 
 export default function Play() {
   const seconds = 60
+  const attempts = 3
+
+  const bronze = 1
+  const silver = 3
+  const gold = 6
+  const platinum = 8
+
+  const bronzeInStock = true
+  const silverInStock = true
+  const goldInStock = true
+  const platinumInStock = true
 
   const constainerRef = React.useRef(null)
   const [height, setHeight] = React.useState(1200)
   const [sweetArray, setSweetArray] = React.useState([])
   const [sweetNumber, setSweetNumber] = React.useState(0)
   const [timer, setTimer] = React.useState(seconds)
-  const { score } = useGameStateContext()
+  const { score, prize } = useGameStateContext()
+  const dispatch = useGameDispatchContext()
+  const [cookies, setCookie] = useCookies(["playAttempts"])
 
   function handleImageHeight() {
     setHeight(
@@ -48,16 +68,28 @@ export default function Play() {
     )
   }
 
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1))
-      let temp = array[i]
-      array[i] = array[j]
-      array[j] = temp
+  function saveToCookies() {
+    let tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    tomorrow.setHours(0)
+    tomorrow.setMinutes(0)
+    tomorrow.setMilliseconds(0)
+
+    if (!cookies.playAttempts) {
+      setCookie("playAttempts", attempts, { path: "/", expires: tomorrow })
+    } else {
+      let attempts = parseInt(cookies.playAttempts, 10) - 1
+      setCookie("playAttempts", attempts.toString(), {
+        path: "/",
+        expires: tomorrow,
+      })
     }
   }
 
   function startNewGame() {
+    dispatch({ type: "UPDATE_SCORE", score: 0 })
+    dispatch({ type: "UPDATE_PRIZE", prize: "" })
+
     let shuffledSweets = Array.from(sweetData.keys())
     shuffleArray(shuffledSweets)
     setSweetArray(shuffledSweets)
@@ -69,6 +101,13 @@ export default function Play() {
   }, [])
 
   React.useEffect(() => {
+    const timeout = setInterval(() => {
+      timer > 0 && setTimer(timer - 1)
+    }, 1000)
+    return () => clearInterval(timeout)
+  }, [timer])
+
+  React.useEffect(() => {
     setSweetNumber(sweetArray[score])
   })
 
@@ -76,6 +115,39 @@ export default function Play() {
     window.addEventListener("resize", handleImageHeight)
     return () => window.removeEventListener("resize", handleImageHeight)
   }, [])
+
+  React.useEffect(() => {
+    if (score === platinum - 1) {
+      setSweetNumber(99)
+    }
+  })
+
+  React.useEffect(() => {
+    if (timer === 0 || score === platinum) {
+      if (score < bronze) {
+        dispatch({ type: "UPDATE_PRIZE", prize: "LOST" })
+      } else if (score >= bronze && score < silver && bronzeInStock) {
+        dispatch({ type: "UPDATE_PRIZE", prize: "BRONZE" })
+      } else if (
+        (score >= silver && score < gold && silverInStock) ||
+        (score >= bronze && score < silver && !bronzeInStock) ||
+        (score >= gold && !goldInStock)
+      ) {
+        dispatch({ type: "UPDATE_PRIZE", prize: "SILVER" })
+      } else if (
+        (score >= gold && score < platinum && goldInStock) ||
+        (score >= silver && score < gold && !silverInStock) ||
+        (score >= platinum && !platinumInStock)
+      ) {
+        dispatch({ type: "UPDATE_PRIZE", prize: "GOLD" })
+      } else if (
+        (score >= platinum && platinumInStock) ||
+        (score >= gold && score < platinum && !goldInStock)
+      ) {
+        dispatch({ type: "UPDATE_PRIZE", prize: "PLATINUM" })
+      }
+    }
+  }, [timer])
 
   return (
     <>
@@ -95,15 +167,33 @@ export default function Play() {
                 top={sweet.top}
                 left={sweet.left}
                 id={sweet.id}
+                image={sweet.image}
                 sweetNumber={sweetNumber}
-                setSweetNumber={setSweetNumber}
-                sweetArray={sweetArray}
+                seconds={seconds}
+                timer={timer}
+                setTimer={setTimer}
               />
             )
           })}
+          <SweetButton
+            key="santa"
+            top={39}
+            left={41.3}
+            id={99}
+            image={santa}
+            sweetNumber={sweetNumber}
+            seconds={seconds}
+            timer={timer}
+            setTimer={setTimer}
+          />
         </motion.div>
       </GameLandscapeStyles>
-      <SweetToFind image={sweetData[sweetNumber]?.image} />
+      <SweetToFind
+        image={score < platinum - 1 ? sweetData[sweetNumber]?.image : santa}
+        seconds={seconds}
+        timer={timer}
+      />
+      {prize && <Prize startNewGame={startNewGame} />}
     </>
   )
 }

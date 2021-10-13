@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { motion } from "framer-motion"
 import {
   useGameDispatchContext,
   useGameStateContext,
@@ -10,32 +11,60 @@ const SweetButtonStyles = styled.button`
   position: absolute;
   top: ${(props) => (props.top ? `${props.top}%` : "unset")};
   left: ${(props) => (props.left ? `${props.left}%` : "unset")};
-  bottom: ${(props) => (props.bottom ? `${props.bottom}%` : "unset")};
-  right: ${(props) => (props.right ? `${props.right}%` : "unset")};
-  background: blue;
+  background: transparent;
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  border: 3px solid white;
+  border: none;
   outline: none;
   color: white;
-  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  :focus,
+  :active {
+    outline: none;
+    border: none;
+  }
+  img {
+    display: block;
+    width: 80px;
+  }
 `
 
 export default function SweetButton({
   sweetNumber,
   top,
   left,
-  bottom,
-  right,
   id,
+  image,
+  seconds,
+  timer,
+  setTimer,
   ...rest
 }) {
+  const [clicked, setClicked] = React.useState(false)
   const dispatch = useGameDispatchContext()
   const { score } = useGameStateContext()
 
   function handleClick() {
-      dispatch({ type: "UPDATE_SCORE", score: score + 1 })
+    dispatch({ type: "UPDATE_SCORE", score: score + 1 })
+    setClicked(!clicked)
+    if (timer > seconds - 10) {
+      setTimer(seconds)
+    } else {
+      setTimer(timer + 10)
+    }
+  }
+
+  const variants = {
+    initial: { opacity: 0, scale: 1 },
+    animation: {
+      opacity: [0, 0.9, 0],
+      scale: [1, 1.8, 1],
+    },
+    transition: { duration: 0.8 },
   }
 
   return (
@@ -46,12 +75,19 @@ export default function SweetButton({
         disabled={sweetNumber !== parseInt(id, 10)}
         top={top}
         left={left}
-        bottom={bottom}
-        right={right}
         data-sweet-id={id}
         {...rest}
       >
-        {score}
+        {clicked && (
+          <motion.img
+            src={image}
+            alt=""
+            variants={variants}
+            initial="initial"
+            animate="animation"
+            onAnimationComplete={() => setClicked(false)}
+          />
+        )}
       </SweetButtonStyles>
     </>
   )

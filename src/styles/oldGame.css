@@ -1,12 +1,12 @@
 @font-face {
   font-family: "Gill Sans";
-  src: url("../fonts/GillSans.eot");
+  src: url("../assets/fonts/GillSans.eot");
   src: local("Gill Sans"), local("GillSans"),
-    url("../fonts/GillSans.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/GillSans.woff2") format("woff2"),
-    url("../fonts/GillSans.woff") format("woff"),
-    url("../fonts/GillSans.ttf") format("truetype"),
-    url("../fonts/GillSans.svg#GillSans") format("svg");
+    url("../assets/fonts/GillSans.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/GillSans.woff2") format("woff2"),
+    url("../assets/fonts/GillSans.woff") format("woff"),
+    url("../assets/fonts/GillSans.ttf") format("truetype"),
+    url("../assets/fonts/GillSans.svg#GillSans") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -14,14 +14,14 @@
 
 @font-face {
   font-family: "Cormorant Garamond";
-  src: url("../fonts/CormorantGaramond-Regular.eot");
+  src: url("../assets/fonts/CormorantGaramond-Regular.eot");
   src: local("Cormorant Garamond Regular"), local("CormorantGaramond-Regular"),
-    url("../fonts/CormorantGaramond-Regular.eot?#iefix")
+    url("../assets/fonts/CormorantGaramond-Regular.eot?#iefix")
       format("embedded-opentype"),
-    url("../fonts/CormorantGaramond-Regular.woff2") format("woff2"),
-    url("../fonts/CormorantGaramond-Regular.woff") format("woff"),
-    url("../fonts/CormorantGaramond-Regular.ttf") format("truetype"),
-    url("../fonts/CormorantGaramond-Regular.svg#CormorantGaramond-Regular")
+    url("../assets/fonts/CormorantGaramond-Regular.woff2") format("woff2"),
+    url("../assets/fonts/CormorantGaramond-Regular.woff") format("woff"),
+    url("../assets/fonts/CormorantGaramond-Regular.ttf") format("truetype"),
+    url("../assets/fonts/CormorantGaramond-Regular.svg#CormorantGaramond-Regular")
       format("svg");
   font-weight: normal;
   font-style: normal;
@@ -30,14 +30,14 @@
 
 @font-face {
   font-family: "Cormorant Garamond";
-  src: url("../fonts/CormorantGaramond-Italic.eot");
+  src: url("../assets/fonts/CormorantGaramond-Italic.eot");
   src: local("Cormorant Garamond Italic"), local("CormorantGaramond-Italic"),
-    url("../fonts/CormorantGaramond-Italic.eot?#iefix")
+    url("../assets/fonts/CormorantGaramond-Italic.eot?#iefix")
       format("embedded-opentype"),
-    url("../fonts/CormorantGaramond-Italic.woff2") format("woff2"),
-    url("../fonts/CormorantGaramond-Italic.woff") format("woff"),
-    url("../fonts/CormorantGaramond-Italic.ttf") format("truetype"),
-    url("../fonts/CormorantGaramond-Italic.svg#CormorantGaramond-Italic")
+    url("../assets/fonts/CormorantGaramond-Italic.woff2") format("woff2"),
+    url("../assets/fonts/CormorantGaramond-Italic.woff") format("woff"),
+    url("../assets/fonts/CormorantGaramond-Italic.ttf") format("truetype"),
+    url("../assets/fonts/CormorantGaramond-Italic.svg#CormorantGaramond-Italic")
       format("svg");
   font-weight: normal;
   font-style: italic;
@@ -46,14 +46,14 @@
 
 @font-face {
   font-family: "Cormorant Garamond";
-  src: url("../fonts/CormorantGaramond-Bold.eot");
+  src: url("../assets/fonts/CormorantGaramond-Bold.eot");
   src: local("Cormorant Garamond Bold"), local("CormorantGaramond-Bold"),
-    url("../fonts/CormorantGaramond-Bold.eot?#iefix")
+    url("../assets/fonts/CormorantGaramond-Bold.eot?#iefix")
       format("embedded-opentype"),
-    url("../fonts/CormorantGaramond-Bold.woff2") format("woff2"),
-    url("../fonts/CormorantGaramond-Bold.woff") format("woff"),
-    url("../fonts/CormorantGaramond-Bold.ttf") format("truetype"),
-    url("../fonts/CormorantGaramond-Bold.svg#CormorantGaramond-Bold")
+    url("../assets/fonts/CormorantGaramond-Bold.woff2") format("woff2"),
+    url("../assets/fonts/CormorantGaramond-Bold.woff") format("woff"),
+    url("../assets/fonts/CormorantGaramond-Bold.ttf") format("truetype"),
+    url("../assets/fonts/CormorantGaramond-Bold.svg#CormorantGaramond-Bold")
       format("svg");
   font-weight: bold;
   font-style: normal;
@@ -62,7 +62,7 @@
 
 @font-face {
   font-family: "Canopee";
-  src: url("../fonts/Canopee-Regular.otf") format("opentype");
+  src: url("../assets/fonts/Canopee-Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -285,7 +285,7 @@ header .inside-left-menu .internal-structure .close-button-menu {
 }
 header .close-button-menu,
 .p-modal-close {
-  background-image: url("../images/old-game/close-button-mennu.svg") !important;
+  background-image: url("../assets/old-game/close-button-mennu.svg") !important;
 }
 header .inside-left-menu .internal-structure .back-button {
   display: none;
@@ -452,7 +452,7 @@ header .angle-right {
   transition: opacity 0.5s, margin-left 0.5s;
 }
 .angle-right {
-  background-image: url("../images/old-game/arrow-right.png");
+  background-image: url("../assets/old-game/arrow-right.png");
 }
 .angle-right {
   display: inline-block;
@@ -481,7 +481,7 @@ header .angle-right {
   z-index: 4;
   width: 20px;
   height: 20px;
-  background-image: url("../images/old-game/close-button-mennu.svg");
+  background-image: url("../assets/old-game/close-button-mennu.svg");
   background-repeat: no-repeat;
   background-size: 70%;
   background-position: right;
@@ -690,19 +690,6 @@ button.button-box-black-color {
   border: 1px solid #000;
   background-color: #000;
 }
-/* #bag .loading {
-  background: url(/themes/penhaligons/assets/img/preloader.gif) no-repeat #fff
-    center center;
-  z-index: -1;
-  padding: 50px 0 0 0;
-  font-size: 23px;
-  opacity: 0;
-  animation: opacity 0.2s;
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-} */
 #login-register {
   position: fixed;
   height: 100%;
@@ -759,7 +746,7 @@ body.hasBanner .window-drch-izq.window-small {
   z-index: 144;
   width: 20px;
   height: 20px;
-  background-image: url("../images/old-game/close-button-mennu.svg");
+  background-image: url("../assets/old-game/close-button-mennu.svg");
   background-repeat: no-repeat;
   background-size: 70%;
   float: right;
@@ -847,7 +834,7 @@ li {
 .search-form .search-form-input .search-form-btns-hand-lens {
   width: 22px;
   height: 22px;
-  background-image: url("../images/old-game/search.svg");
+  background-image: url("../assets/old-game/search.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -859,7 +846,7 @@ li {
 .search-form-btns-hand-lens {
   width: 22px;
   height: 22px;
-  background-image: url("../images/old-game/search.svg");
+  background-image: url("../assets/old-game/search.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -870,7 +857,7 @@ li {
   transform: translateY(-50%);
 }
 .search-form .search-form-input .search-form-btns-hand-lens {
-  background-image: url("../images/old-game/search.svg") !important;
+  background-image: url("../assets/old-game/search.svg") !important;
 }
 #blockPuigsearch .search-wrapper .top-search-title {
   font-family: "CormorantGaramond";
@@ -1178,7 +1165,7 @@ footer .footer-principal .select2-container .select2-selection__rendered span {
   width: 0;
 }
 .select2-container .select2-selection .select2-selection__arrow b {
-  background-image: url("../images/old-game/arrow-down.svg");
+  background-image: url("../assets/old-game/arrow-down.svg");
 }
 footer .socialiconsaccess-content {
   margin-top: 20px;
@@ -1262,7 +1249,7 @@ footer .about-us-footer {
 }
 footer .accordion-arrow-footer {
   display: none;
-  background-image: url("../images/old-game/arrow_mobile_up.png");
+  background-image: url("../assets/old-game/arrow_mobile_up.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -1428,7 +1415,7 @@ footer .select2-results__options li.selected {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url("../images/old-game/landing.jpg") no-repeat 50% 50%;
+  background: url("../assets/old-game/landing.jpg") no-repeat 50% 50%;
   background-size: cover;
   opacity: 0;
   animation: fadein 1s forwards;
@@ -1468,7 +1455,7 @@ footer .select2-results__options li.selected {
   height: 303px;
   bottom: 0;
   left: 0;
-  background: url("../images/old-game/footer.png") no-repeat;
+  background: url("../assets/old-game/footer.png") no-repeat;
   background-size: cover;
 }
 .content_wrap:before,
@@ -1477,7 +1464,7 @@ footer .select2-results__options li.selected {
   position: absolute;
   width: 50%;
   height: 100%;
-  background: url("../images/old-game/left.png") no-repeat 100% 100%;
+  background: url("../assets/old-game/left.png") no-repeat 100% 100%;
   bottom: 0;
   right: 100%;
   background-size: cover;
@@ -1485,7 +1472,7 @@ footer .select2-results__options li.selected {
   transform: translateX(56%);
 }
 .content_wrap:after {
-  background: url("../images/old-game/right.png") no-repeat 0% 100%;
+  background: url("../assets/old-game/right.png") no-repeat 0% 100%;
   background-size: cover;
   left: 100%;
   right: auto;
@@ -1572,7 +1559,7 @@ footer .select2-results__options li.selected {
   height: 100%;
   top: 0;
   left: 0;
-  background: url("../images/old-game/score.png") no-repeat;
+  background: url("../assets/old-game/score.png") no-repeat;
   background-size: cover;
 }
 .preloader {
@@ -2350,7 +2337,7 @@ header {
 }
 @media (max-width: 420px) {
   .landingimage {
-    background-image: url("../images/old-game/landing_mobile.jpg");
+    background-image: url("../assets/old-game/landing_mobile.jpg");
   }
   .button-wrap {
     padding-top: 25px;
@@ -2416,13 +2403,13 @@ header {
     height: auto;
   }
   .footerimage {
-    background: url("../images/old-game/mobilefooter.png") no-repeat;
+    background: url("../assets/old-game/mobilefooter.png") no-repeat;
     height: 130px;
     background-size: cover;
     bottom: 94px;
   }
   .content_wrap:before {
-    background: url("../images/old-game/bgmobile.png") no-repeat 0 100%;
+    background: url("../assets/old-game/bgmobile.png") no-repeat 0 100%;
     transform: none;
     right: auto;
     left: 0;

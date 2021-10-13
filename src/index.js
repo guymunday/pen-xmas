@@ -2,8 +2,10 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { createGlobalStyle } from "styled-components"
 import App from "./App"
+import Layout from "./components/Layout"
 import { GlobalProvider } from "./utils/gameReducer"
 import reset from "./styles/reset"
+import "./styles/oldGame.css"
 import global from "./styles/global"
 
 const GlobalStyle = createGlobalStyle`
@@ -16,7 +18,9 @@ export default function Root() {
     <>
       <GlobalStyle />
       <GlobalProvider>
-        <App />
+        <Layout>
+          <App />
+        </Layout>
       </GlobalProvider>
     </>
   )

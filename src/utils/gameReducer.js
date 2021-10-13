@@ -4,6 +4,7 @@ import { createContext, useReducer, useContext } from "react"
 let initialGameContext = {
   id: "",
   score: 0,
+  prize: "",
 }
 
 const GameStateContext = createContext(initialGameContext)
@@ -21,6 +22,12 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         score: action.score,
+      }
+    }
+    case "UPDATE_PRIZE": {
+      return {
+        ...state,
+        prize: action.prize,
       }
     }
     default: {

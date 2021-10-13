@@ -11,12 +11,12 @@ export function imagePromise(state) {
     if (results.every((res) => res)) {
       setTimeout(() => {
         state(false)
-      }, 500)
+      }, 250)
       console.log("all images  finished loading")
     } else {
       setTimeout(() => {
         state(false)
-      }, 500)
+      }, 250)
       console.log("some images failed to load, all finished loading")
     }
   })
