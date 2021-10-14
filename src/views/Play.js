@@ -41,7 +41,7 @@ const GameLandscapeStyles = styled(motion.div)`
 `
 
 export default function Play() {
-  const seconds = 2
+  const seconds = 60
 
   const bronze = 1
   const silver = 3
