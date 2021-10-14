@@ -103,7 +103,7 @@ export default function Play() {
   }
 
   React.useEffect(() => {
-    imagePromise(setLoading, 1000)
+    imagePromise(setLoading, 4000)
   }, [])
 
   React.useEffect(() => {

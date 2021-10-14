@@ -42,10 +42,23 @@ const LoadingStyles = styled.div`
 `
 
 export default function Loading({ play }) {
+  const [countIn, setCountIn] = React.useState(3)
+
+  React.useEffect(() => {
+    const timeout = setInterval(() => {
+      countIn > 0 && setCountIn(countIn - 1)
+    }, 1000)
+    return () => clearInterval(timeout)
+  }, [countIn])
+
   return (
     <>
       <LoadingStyles play={play}>
-        {play ? <h1>Play!</h1> : <div className="loading-indicator"></div>}
+        {play ? (
+          <h1>{countIn > 0 ? countIn : "Play!"}</h1>
+        ) : (
+          <div className="loading-indicator"></div>
+        )}
       </LoadingStyles>
     </>
   )
