@@ -11,11 +11,20 @@ export default function HomeScreenGeneric({
   return (
     <>
       <h1>{title}</h1>
-      <img
-        style={{ display: "block", width: "100%", objectFit: "cover" }}
-        src={image}
-        alt="Penhaligon's"
-      />
+      <div
+        style={{
+          width: "100%",
+          minHeight: 290,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <img
+          style={{ display: "block", width: "100%", objectFit: "cover" }}
+          src={image}
+          alt="Penhaligon's"
+        />
+      </div>
       <p style={{ marginBottom: 75 }}>{copy}</p>
       <HomeScreenPagination
         pagination={pagination}
