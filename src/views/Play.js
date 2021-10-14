@@ -41,7 +41,7 @@ const GameLandscapeStyles = styled(motion.div)`
 `
 
 export default function Play() {
-  const seconds = 60
+  const seconds = 2
 
   const bronze = 1
   const silver = 3
@@ -92,8 +92,6 @@ export default function Play() {
         path: "/",
         expires: tomorrow,
       })
-    } else {
-      initCookies()
     }
   }
 
@@ -142,7 +140,6 @@ export default function Play() {
   React.useEffect(() => {
     if (timer === 0 || score === platinum) {
       setTimer(0)
-      saveToCookies()
       if (score < bronze) {
         dispatch({ type: "UPDATE_PRIZE", prize: "LOST" })
       } else if (score >= bronze && score < silver && bronzeInStock) {
@@ -168,42 +165,6 @@ export default function Play() {
     }
   }, [timer])
 
-  // React.useEffect(() => {
-  //   if (previous === "" && prize === "BRONZE") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "" && prize === "SILVER") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "" && prize === "GOLD") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "" && prize === "PLATINUM") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "BRONZE" && prize === "BRONZE") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "BRONZE" && prize === "SILVER") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "BRONZE" && prize === "GOLD") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "BRONZE" && prize === "PLATINUM") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "SILVER" && prize === "SILVER") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "SILVER" && prize === "GOLD") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "SILVER" && prize === "PLATINUM") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "GOLD" && prize === "GOLD") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "GOLD" && prize === "PLATINUM") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (previous === "PLATINUM" && prize === "PLATINUM") {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else if (!previous) {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   } else {
-  //     dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
-  //   }
-  // }, [prize])
-
   React.useEffect(() => {
     if (previous === "") {
       dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
@@ -219,6 +180,12 @@ export default function Play() {
       dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
     } else if (previous === "GOLD" && prize === "PLATINUM") {
       dispatch({ type: "UPDATE_PREVIOUS_PRIZE", previous: prize })
+    }
+  }, [prize])
+
+  React.useEffect(() => {
+    if (prize) {
+      saveToCookies()
     }
   }, [prize])
 
