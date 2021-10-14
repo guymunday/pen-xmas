@@ -3,14 +3,14 @@ import styled from "styled-components"
 import { motion } from "framer-motion"
 import corner from "../assets/corner-svg.svg"
 
-const PopupStyles = styled.div`
+export const PopupStyles = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   z-index: 99;
-  padding: 20px;
+  padding: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,10 +23,11 @@ const PopupStyles = styled.div`
   }
   .popup-inner {
     position: relative;
-    max-width: 350px;
+    max-width: 300px;
     margin: auto;
     padding: 5px;
     background: var(--off-white);
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.8));
     text-align: center;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -41,6 +42,7 @@ const PopupStyles = styled.div`
       position: absolute;
       width: 25px;
       height: 25px;
+      pointer-events: none;
       &.popup-corner-1 {
         top: -25px;
         left: -25px;
@@ -99,8 +101,9 @@ export default function Popup({ children, ...rest }) {
       <PopupStyles {...rest}>
         <motion.div
           className="popup-inner"
-          initial={{ scale: 0.3 }}
+          initial={{ scale: 0 }}
           animate={{ scale: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <div className="popup-content">{children}</div>
           <object

@@ -6,7 +6,7 @@ import {
   useGameStateContext,
 } from "../utils/gameReducer"
 
-const SweetButtonStyles = styled.button`
+const SweetButtonStyles = styled(motion.button)`
   display: block;
   position: absolute;
   top: ${(props) => (props.top ? `${props.top}%` : "unset")};
@@ -51,10 +51,10 @@ export default function SweetButton({
   function handleClick() {
     dispatch({ type: "UPDATE_SCORE", score: score + 1 })
     setClicked(!clicked)
-    if (timer > seconds - 10) {
+    if (timer > seconds - 5) {
       setTimer(seconds)
     } else {
-      setTimer(timer + 10)
+      setTimer(timer + 5)
     }
   }
 
@@ -63,8 +63,8 @@ export default function SweetButton({
     animation: {
       opacity: [0, 0.9, 0],
       scale: [1, 1.8, 1],
+      transition: { duration: 0.8 },
     },
-    transition: { duration: 0.8 },
   }
 
   return (
@@ -78,16 +78,20 @@ export default function SweetButton({
         data-sweet-id={id}
         {...rest}
       >
-        {clicked && (
-          <motion.img
-            src={image}
-            alt=""
-            variants={variants}
-            initial="initial"
-            animate="animation"
-            onAnimationComplete={() => setClicked(false)}
-          />
-        )}
+        <motion.img
+          src={image}
+          alt=""
+          variants={variants}
+          initial="initial"
+          animate={
+            clicked
+              ? "animation"
+              : // : sweetNumber === parseInt(id, 10) && timer === 10
+                // ? "animation"
+                "initial"
+          }
+          onAnimationComplete={() => setClicked(false)}
+        />
       </SweetButtonStyles>
     </>
   )

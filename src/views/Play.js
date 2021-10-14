@@ -10,9 +10,11 @@ import {
   useGameStateContext,
 } from "../utils/gameReducer"
 import { sweetData } from "../utils/sweetData"
+import { imagePromise } from "../utils/imagePromise"
 import { shuffleArray } from "../utils/shuffleArray"
 import background from "../assets/pen-xmas-background.jpg"
 import santa from "../assets/sweets/sweets-santa.png"
+import Loading from "../components/Loading"
 
 const GameLandscapeStyles = styled(motion.div)`
   width: 100%;
@@ -39,7 +41,6 @@ const GameLandscapeStyles = styled(motion.div)`
 
 export default function Play() {
   const seconds = 60
-  const attempts = 3
 
   const bronze = 1
   const silver = 3
@@ -52,11 +53,14 @@ export default function Play() {
   const platinumInStock = true
 
   const constainerRef = React.useRef(null)
+  const [loading, setLoading] = React.useState(true)
   const [height, setHeight] = React.useState(1200)
   const [sweetArray, setSweetArray] = React.useState([])
   const [sweetNumber, setSweetNumber] = React.useState(0)
   const [timer, setTimer] = React.useState(seconds)
-  const { score, prize } = useGameStateContext()
+  const [countIn, setCountIn] = React.useState(3)
+  const [startTimer, setStartTimer] = React.useState(false)
+  const { score, prize, tries } = useGameStateContext()
   const dispatch = useGameDispatchContext()
   const [cookies, setCookie] = useCookies(["playAttempts"])
 
@@ -76,7 +80,7 @@ export default function Play() {
     tomorrow.setMilliseconds(0)
 
     if (!cookies.playAttempts) {
-      setCookie("playAttempts", attempts, { path: "/", expires: tomorrow })
+      setCookie("playAttempts", tries, { path: "/", expires: tomorrow })
     } else {
       let attempts = parseInt(cookies.playAttempts, 10) - 1
       setCookie("playAttempts", attempts.toString(), {
@@ -87,18 +91,24 @@ export default function Play() {
   }
 
   function startNewGame() {
+    let shuffledSweets = Array.from(sweetData.keys())
+
     dispatch({ type: "UPDATE_SCORE", score: 0 })
     dispatch({ type: "UPDATE_PRIZE", prize: "" })
 
-    let shuffledSweets = Array.from(sweetData.keys())
     shuffleArray(shuffledSweets)
     setSweetArray(shuffledSweets)
     setTimer(seconds)
+    saveToCookies()
   }
 
   React.useEffect(() => {
-    startNewGame()
+    imagePromise(setLoading, 1000)
   }, [])
+
+  React.useEffect(() => {
+    !loading && startNewGame()
+  }, [loading])
 
   React.useEffect(() => {
     const timeout = setInterval(() => {
@@ -124,6 +134,7 @@ export default function Play() {
 
   React.useEffect(() => {
     if (timer === 0 || score === platinum) {
+      setTimer(0)
       if (score < bronze) {
         dispatch({ type: "UPDATE_PRIZE", prize: "LOST" })
       } else if (score >= bronze && score < silver && bronzeInStock) {
@@ -192,8 +203,10 @@ export default function Play() {
         image={score < platinum - 1 ? sweetData[sweetNumber]?.image : santa}
         seconds={seconds}
         timer={timer}
+        loading={loading}
       />
       {prize && <Prize startNewGame={startNewGame} />}
+      {loading && <Loading play />}
     </>
   )
 }

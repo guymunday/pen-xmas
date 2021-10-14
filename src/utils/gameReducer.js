@@ -5,6 +5,7 @@ let initialGameContext = {
   id: "",
   score: 0,
   prize: "",
+  tries: 3,
 }
 
 const GameStateContext = createContext(initialGameContext)
@@ -28,6 +29,12 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         prize: action.prize,
+      }
+    }
+    case "UPDATE_TRIES": {
+      return {
+        ...state,
+        tries: action.tries,
       }
     }
     default: {

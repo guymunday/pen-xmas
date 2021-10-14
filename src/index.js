@@ -18,9 +18,7 @@ export default function Root() {
     <>
       <GlobalStyle />
       <GlobalProvider>
-        <Layout>
-          <App />
-        </Layout>
+        <App />
       </GlobalProvider>
     </>
   )
