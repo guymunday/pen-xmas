@@ -8,6 +8,7 @@ const global = css`
   }
 
   .button {
+    display: inline-block;
     background: none;
     border: 2px solid var(--gold);
     color: var(--gold);
@@ -31,6 +32,7 @@ const global = css`
   }
 
   .button-alt {
+    display: inline-block;
     background: none;
     border: none;
     color: var(--gold);

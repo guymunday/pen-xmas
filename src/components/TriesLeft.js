@@ -49,7 +49,8 @@ export default function TriesLeft() {
       <TriesLeftStyles>
         <div className="tries-bows">
           <div className="tries-bows__bow">
-            {cookies.playAttempts >= 1 || !cookies.playAttempts ? (
+            {parseInt(cookies.playAttempts, 10) >= 1 ||
+            !cookies.playAttempts ? (
               <motion.img
                 src={redBow}
                 alt="red bowtie"
@@ -66,7 +67,8 @@ export default function TriesLeft() {
             )}
           </div>
           <div className="tries-bows__bow">
-            {cookies.playAttempts >= 2 || !cookies.playAttempts ? (
+            {parseInt(cookies.playAttempts, 10) >= 2 ||
+            !cookies.playAttempts ? (
               <motion.img
                 src={redBow}
                 alt="red bowtie"
@@ -83,7 +85,8 @@ export default function TriesLeft() {
             )}
           </div>
           <div className="tries-bows__bow">
-            {cookies.playAttempts >= 3 || !cookies.playAttempts ? (
+            {parseInt(cookies.playAttempts, 10) >= 3 ||
+            !cookies.playAttempts ? (
               <motion.img
                 src={redBow}
                 alt="red bowtie"
@@ -101,8 +104,8 @@ export default function TriesLeft() {
           </div>
         </div>
         <p>
-          {cookies.playAttempts ? cookies.playAttempts : tries}/{tries} attempts
-          remaining
+          {cookies.playAttempts ? parseInt(cookies.playAttempts, 10) : tries}/
+          {tries} attempts remaining
         </p>
       </TriesLeftStyles>
     </>

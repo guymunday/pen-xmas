@@ -6,6 +6,7 @@ import {
   buildStyles,
 } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
+import { useGameStateContext } from "../utils/gameReducer"
 
 const SweetToFindContainer = styled.div`
   position: fixed;
@@ -23,13 +24,30 @@ const SweetToFindStyles = styled(motion.div)`
   padding: 10px;
   box-shadow: var(--shadow);
   pointer-events: none;
+  position: relative;
   img {
     width: 100px;
     object-fit: cover;
   }
+  .score-counter {
+    background: var(--gold);
+    color: var(--off-white);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 20px;
+    box-shadow: 2px -2px 5px 2px rgba(0, 0, 0, 0.4);
+  }
 `
 
 export default function SweetToFind({ image, seconds, timer, loading }) {
+  const { score } = useGameStateContext()
   return (
     <>
       <SweetToFindContainer>
@@ -54,6 +72,7 @@ export default function SweetToFind({ image, seconds, timer, loading }) {
                 {image && <img src={image} alt="" />}
                 <p>Find next</p>
               </CircularProgressbarWithChildren>
+              <div className="score-counter">{score}</div>
             </SweetToFindStyles>
           )}
         </AnimatePresence>
