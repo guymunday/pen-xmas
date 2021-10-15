@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import corner from "../assets/corner-svg.svg"
+import TermsAndMusic from "./TermsAndMusic"
 
 export const PopupStyles = styled.div`
   position: fixed;
@@ -105,7 +106,10 @@ export default function Popup({ children, ...rest }) {
           animate={{ scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="popup-content">{children}</div>
+          <div className="popup-content">
+            {children}
+            <TermsAndMusic />
+          </div>
           <object
             data={corner}
             type="image/svg+xml"

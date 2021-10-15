@@ -61,8 +61,16 @@
 }
 
 @font-face {
-  font-family: "Canopee";
-  src: url("../assets/fonts/Canopee-Regular.otf") format("opentype");
+  font-family: "Gibsons Co";
+  src: url("../assets/fonts/GibsonsCo.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;

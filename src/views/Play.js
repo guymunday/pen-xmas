@@ -59,8 +59,6 @@ export default function Play() {
   const [sweetArray, setSweetArray] = React.useState([])
   const [sweetNumber, setSweetNumber] = React.useState(0)
   const [timer, setTimer] = React.useState(seconds)
-  const [countIn, setCountIn] = React.useState(3)
-  const [startTimer, setStartTimer] = React.useState(false)
   const { open, score, prize, previous, tries } = useGameStateContext()
   const dispatch = useGameDispatchContext()
   const [cookies, setCookie] = useCookies(["playAttempts"])

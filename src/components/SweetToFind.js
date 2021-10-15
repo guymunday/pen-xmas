@@ -7,6 +7,7 @@ import {
 } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 import { useGameStateContext } from "../utils/gameReducer"
+import findNext from "../assets/find-next.svg"
 
 const SweetToFindContainer = styled.div`
   position: fixed;
@@ -28,6 +29,10 @@ const SweetToFindStyles = styled(motion.div)`
   img {
     width: 100px;
     object-fit: cover;
+  }
+  .find-next-svg {
+    width: 98px;
+    margin-top: -8px;
   }
   .score-counter {
     background: var(--gold);
@@ -70,7 +75,11 @@ export default function SweetToFind({ image, seconds, timer, loading }) {
                 })}
               >
                 {image && <img src={image} alt="" />}
-                <p>Find next</p>
+                <object
+                  data={findNext}
+                  type="image/svg+xml"
+                  className="find-next-svg"
+                />
               </CircularProgressbarWithChildren>
               <div className="score-counter">{score}</div>
             </SweetToFindStyles>

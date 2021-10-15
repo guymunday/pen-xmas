@@ -104,7 +104,7 @@ export default function TriesLeft() {
           </div>
         </div>
         <p>
-          {cookies.playAttempts ? parseInt(cookies.playAttempts, 10) : tries}/
+          {cookies.playAttempts ? parseInt(cookies.playAttempts, 10) : tries} /{" "}
           {tries} attempts remaining
         </p>
       </TriesLeftStyles>

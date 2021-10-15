@@ -5,10 +5,34 @@ import AjaxButton from "./AjaxButton"
 import Popup from "./Popup"
 import TriesLeft from "./TriesLeft"
 import emptyJar from "../assets/empty-jar.png"
+import ContinueShoppingButton from "./ContinueShoppingButton"
 
 export default function Prize({ startNewGame }) {
   const { prize, previous, score } = useGameStateContext()
   const [cookies, setCookies] = useCookies()
+
+  if (
+    parseInt(cookies.playAttempts, 10) === 0 &&
+    prize === "LOST" &&
+    previous !== "LOST"
+  )
+    return (
+      <>
+        <Popup>
+          <h1>Game Over</h1>
+          <img src={emptyJar} alt="lost" height="180" />
+          <p>Nobody leaves empty handed. Here's your previous prize.</p>
+          <AjaxButton>Add to basket</AjaxButton>
+          <ContinueShoppingButton>Continue Shopping</ContinueShoppingButton>
+          <TriesLeft />
+          <p className="terms">
+            Your prize will be added to your basket with an order of £140 or
+            more. Limited to 3 plays per day. Peruse the full terms and
+            conditions
+          </p>
+        </Popup>
+      </>
+    )
 
   return (
     <>
@@ -22,11 +46,14 @@ export default function Prize({ startNewGame }) {
           </p>
         )}
         {prize === "BRONZE" && (
+          <p>Not too shabby! You found {score} sweets. Here is your prize.</p>
+        )}
+        {prize === "SILVER" && (
           <p>Good spot! You found {score} sweets. Here is your prize.</p>
         )}
         {prize === "GOLD" && (
           <p>
-            I say, bravo! You spotted all {score} sweets, the jackpot prize is
+            I say, bravo! You spotted {score} sweets, the jackpot prize is
             yours!
           </p>
         )}
@@ -42,9 +69,7 @@ export default function Prize({ startNewGame }) {
             Have another try
           </button>
         ) : (
-          <a className="button" href="https://www.penhaligons.com">
-            Continue Shopping
-          </a>
+          <ContinueShoppingButton>Continue Shopping</ContinueShoppingButton>
         )}
         <TriesLeft />
         <p className="terms">

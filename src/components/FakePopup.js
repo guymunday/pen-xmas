@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { motion } from "framer-motion"
 import { PopupStyles } from "./Popup"
 import corner from "../assets/corner-svg.svg"
+import TermsAndMusic from "./TermsAndMusic"
 
 const FakePopupStyles = styled(PopupStyles)`
   position: absolute;
@@ -18,7 +19,7 @@ export default function FakePopup({ loading, children, ...rest }) {
           animate={{ scale: loading ? 0 : 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="popup-content">{children}</div>
+          <div className="popup-content">{children}<TermsAndMusic/></div>
           <object
             data={corner}
             type="image/svg+xml"
