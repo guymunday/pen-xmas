@@ -81,7 +81,15 @@ export default function SweetToFind({ image, seconds, timer, loading }) {
                   className="find-next-svg"
                 />
               </CircularProgressbarWithChildren>
-              <div className="score-counter">{score}</div>
+              {score > 0 && (
+                <motion.div
+                  className="score-counter"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                >
+                  {score}
+                </motion.div>
+              )}
             </SweetToFindStyles>
           )}
         </AnimatePresence>

@@ -20,7 +20,7 @@ import Loading from "../components/Loading"
 const GameLandscapeStyles = styled(motion.div)`
   width: 100%;
   height: 100vh;
-  background: green;
+  background: var(--gold);
   display: flex;
   align-items: center;
   justify-content: center;

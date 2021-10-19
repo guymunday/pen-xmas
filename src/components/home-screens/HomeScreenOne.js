@@ -3,9 +3,16 @@ import { useCookies } from "react-cookie"
 import TriesLeft from "../TriesLeft"
 import badge from "../../assets/pen-badge.png"
 import emptyJar from "../../assets/empty-jar.png"
+import { useGameDispatchContext } from "../../utils/gameReducer"
 
 export default function HomeScreenOne({ setPagination }) {
   const [cookies, setCookies] = useCookies()
+  const dispatch = useGameDispatchContext()
+
+  function handleButtonClick() {
+    setPagination(1)
+    dispatch({ type: "UPDATE_AUDIO", audio: true })
+  }
 
   return (
     <>
@@ -21,7 +28,7 @@ export default function HomeScreenOne({ setPagination }) {
             hidden some sweets around the factory and we need your help locating
             them.
           </p>
-          <button className="button" onClick={() => setPagination(1)}>
+          <button className="button" onClick={handleButtonClick}>
             Get Searching
           </button>
         </>

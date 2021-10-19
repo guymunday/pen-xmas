@@ -2,6 +2,7 @@ import React from "react"
 import { createContext, useReducer, useContext } from "react"
 
 let initialGameContext = {
+  audio: false,
   id: "",
   score: 0,
   prize: "",
@@ -15,6 +16,12 @@ const GameDispatchContext = createContext()
 
 const gameReducer = (state, action) => {
   switch (action.type) {
+    case "UPDATE_AUDIO": {
+      return {
+        ...state,
+        audio: action.audio,
+      }
+    }
     case "UPDATE_ID": {
       return {
         ...state,

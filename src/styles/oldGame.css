@@ -234,6 +234,7 @@ header ul.primary-menu a {
   display: inline;
   font-size: 17px;
   padding: 10px 0;
+  text-decoration: none;
 }
 header ul li,
 header ul a {
