@@ -106,6 +106,7 @@ const global = css`
 
   .terms {
     font-size: 0.8rem;
+    color: #000;
   }
 `
 

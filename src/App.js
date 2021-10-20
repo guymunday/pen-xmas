@@ -8,27 +8,47 @@ import Home from "./views/Home"
 import Play from "./views/Play"
 
 export default function App() {
-  // const apiUrl = "https://play.penhaligons.com"
-  const apiUrl = "https://penhaligons.wildishandco.co.uk"
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState(false)
+  const [data, setData] = React.useState({})
   const dispatch = useGameDispatchContext()
 
   React.useEffect(() => {
-    // dispatch({ type: "UPDATE_API_URL", url: apiUrl })
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/content`)
+      .then((res) => {
+        setData(res?.data?.data)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.log(error)
+        setLoading(false)
+        setError(true)
+      })
   }, [])
+
+  React.useEffect(() => {
+    if (data && !loading) {
+      dispatch({
+        type: "UPDATE_TRIES",
+        tries: parseInt(data?.settings?.total_tries, 10),
+      })
+    }
+  }, [data, loading])
 
   return (
     <>
       <Router>
-        <Layout>
+        <Layout loading={loading}>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home data={data} />
             </Route>
             <Route path="/play">
-              <Play />
+              <Play data={data} />
             </Route>
             <Route>
-              <Home />
+              <Home data={data} />
             </Route>
           </Switch>
         </Layout>

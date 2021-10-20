@@ -1,9 +1,8 @@
 import React from "react"
+import Loading from "./Loading"
 
-export default function Layout({ children }) {
+export default function Layout({ loading, children }) {
   return (
-    <>
-      <main>{children}</main>
-    </>
+    <>{loading ? <Loading appLoading={true} /> : <main>{children}</main>}</>
   )
 }

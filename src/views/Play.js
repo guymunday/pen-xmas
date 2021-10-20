@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import axios from "axios"
 import { motion } from "framer-motion"
 import { useCookies } from "react-cookie"
 import { Redirect } from "react-router-dom"
@@ -40,18 +41,19 @@ const GameLandscapeStyles = styled(motion.div)`
   }
 `
 
-export default function Play() {
-  const seconds = 60
+export default function Play({ data }) {
+  const seconds = parseInt(data?.settings?.play_time, 10)
+  const secondsToAdd = parseInt(data?.settings?.add_time, 10)
 
-  const bronze = 1
-  const silver = 3
-  const gold = 6
-  const platinum = 8
+  const bronze = parseInt(data?.settings?.point_bronze, 10)
+  const silver = parseInt(data?.settings?.point_silver, 10)
+  const gold = parseInt(data?.settings?.point_gold, 10)
+  const platinum = parseInt(data?.settings?.point_platinum, 10)
 
-  const bronzeInStock = true
-  const silverInStock = true
-  const goldInStock = true
-  const platinumInStock = true
+  const bronzeInStock = parseInt(data?.settings?.stock_bronze, 10) > 0
+  const silverInStock = parseInt(data?.settings?.stock_silver, 10) > 0
+  const goldInStock = parseInt(data?.settings?.stock_gold, 10) > 0
+  const platinumInStock = parseInt(data?.settings?.stock_platinum, 10) > 0
 
   const constainerRef = React.useRef(null)
   const [loading, setLoading] = React.useState(true)
@@ -93,6 +95,19 @@ export default function Play() {
     }
   }
 
+  function apiGameStart() {
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/v1/start`)
+      .then((res) => {
+        console.log(res)
+        dispatch({
+          type: "UPDATE_ID",
+          id: res.data.data.id,
+        })
+      })
+      .catch((error) => console.log(error))
+  }
+
   function startNewGame() {
     let shuffledSweets = Array.from(sweetData.keys())
 
@@ -100,6 +115,7 @@ export default function Play() {
     dispatch({ type: "UPDATE_PRIZE", prize: "" })
 
     initCookies()
+    apiGameStart()
     shuffleArray(shuffledSweets)
     setSweetArray(shuffledSweets)
     setTimer(seconds)
@@ -212,6 +228,7 @@ export default function Play() {
                 image={sweet.image}
                 sweetNumber={sweetNumber}
                 seconds={seconds}
+                secondsToAdd={secondsToAdd}
                 timer={timer}
                 setTimer={setTimer}
               />
@@ -225,6 +242,7 @@ export default function Play() {
             image={santa}
             sweetNumber={sweetNumber}
             seconds={seconds}
+            secondsToAdd={secondsToAdd}
             timer={timer}
             setTimer={setTimer}
           />
@@ -236,7 +254,7 @@ export default function Play() {
         timer={timer}
         loading={loading}
       />
-      {prize && !loading && <Prize startNewGame={startNewGame} />}
+      {prize && !loading && <Prize data={data} startNewGame={startNewGame} />}
       {loading && <Loading play />}
     </>
   )

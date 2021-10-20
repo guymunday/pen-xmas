@@ -40,6 +40,7 @@ export default function SweetButton({
   id,
   image,
   seconds,
+  secondsToAdd,
   timer,
   setTimer,
   ...rest
@@ -51,10 +52,10 @@ export default function SweetButton({
   function handleClick() {
     dispatch({ type: "UPDATE_SCORE", score: score + 1 })
     setClicked(!clicked)
-    if (timer > seconds - 5) {
+    if (timer > seconds - secondsToAdd) {
       setTimer(seconds)
     } else {
-      setTimer(timer + 5)
+      setTimer(timer + secondsToAdd)
     }
   }
 

@@ -7,7 +7,7 @@ import bag from "../assets/old-game/bag.svg"
 export default function Header() {
   return (
     <>
-      <header style={{ zIndex: 999 }}>
+      <header>
         <div className="container-header">
           <div className="row visible-sm visible-xs wrapper-mobile-header">
             <div className="col-xs-3">

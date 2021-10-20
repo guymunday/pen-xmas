@@ -5,13 +5,10 @@ import HomeScreenOne from "../components/home-screens/HomeScreenOne"
 import HomeScreenGeneric from "../components/home-screens/HomeScreenGeneric"
 import FakePopup from "../components/FakePopup"
 import background from "../assets/pen-xmas-background.jpg"
-import santa from "../assets/sweets/sweets-santa.png"
-import search from "../assets/pen-search.png"
 import { imagePromise } from "../utils/imagePromise"
 import Loading from "../components/Loading"
 import { useGameStateContext } from "../utils/gameReducer"
 import HomeScreenOff from "../components/home-screens/HomeScreenOff"
-import Popup from "../components/Popup"
 
 const HomeStyles = styled.div`
   position: relative;
@@ -32,7 +29,7 @@ const HomeStyles = styled.div`
   }
 `
 
-export default function Home() {
+export default function Home({ data }) {
   const [loading, setLoading] = React.useState(true)
   const [pagination, setPagination] = React.useState(0)
   const { open } = useGameStateContext()
@@ -40,6 +37,8 @@ export default function Home() {
   React.useEffect(() => {
     imagePromise(setLoading)
   }, [])
+
+  console.log(data)
 
   return (
     <>
@@ -50,43 +49,49 @@ export default function Home() {
           {open === "on" ? (
             <>
               {pagination === 0 ? (
-                <HomeScreenOne setPagination={setPagination} />
+                <HomeScreenOne data={data} setPagination={setPagination} />
               ) : pagination === 1 ? (
                 <HomeScreenGeneric
                   pagination={pagination}
                   setPagination={setPagination}
-                  title="Search"
-                  image={search}
-                  copy="Drag the map to search for the hidden sweets."
+                  title={data?.introduction?.intro1_title}
+                  image={`${process.env.REACT_APP_IMAGES_URL}/${data?.introduction?.intro1_desktop_image?.name}`}
+                  copy={data?.introduction?.intro1_text}
                 />
               ) : pagination === 2 ? (
                 <HomeScreenGeneric
                   pagination={pagination}
                   setPagination={setPagination}
-                  title="Click or Tap"
-                  image={santa}
-                  copy="When you find the sweets in question, click or tap on them to earn points."
+                  title={data?.introduction?.intro2_title}
+                  image={`${process.env.REACT_APP_IMAGES_URL}/${data?.introduction?.intro2_desktop_image?.name}`}
+                  copy={data?.introduction?.intro2_text}
                 />
               ) : pagination === 3 ? (
                 <HomeScreenGeneric
                   pagination={pagination}
                   setPagination={setPagination}
-                  title="Win The Scented Bonanza!"
-                  image={santa}
-                  copy="Find the gummy Father Christmas to win a scented bonanza beyond your wildest dreams!"
+                  title={data?.introduction?.intro3_title}
+                  image={`${process.env.REACT_APP_IMAGES_URL}/${data?.introduction?.intro3_desktop_image?.name}`}
+                  copy={data?.introduction?.intro3_text}
                 />
               ) : (
-                <HomeScreenOne setPagination={setPagination} />
+                <HomeScreenOne data={data} setPagination={setPagination} />
               )}
             </>
           ) : (
-            <HomeScreenOff />
+            <HomeScreenOff data={data} />
           )}
           {open === "on" && (
             <p className="terms">
-              Your prize will be added to your basket with an order of £140 or
-              more. Limited to 3 plays per day. Peruse the full terms and
-              conditions
+              {data?.home?.terms_text}{" "}
+              <a
+                href={data?.home?.link}
+                target="_blank"
+                rel="noopener"
+                className="terms"
+              >
+                {data?.home?.link_text}
+              </a>
             </p>
           )}
         </FakePopup>

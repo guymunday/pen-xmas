@@ -23,7 +23,7 @@ const LoadingStyles = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: ${(props) => (props.appLoading ? "#000" : "rgba(0, 0, 0, 0.7)")};
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@ const LoadingStyles = styled.div`
   }
 `
 
-export default function Loading({ play }) {
+export default function Loading({ appLoading, play }) {
   const [countIn, setCountIn] = React.useState(3)
 
   React.useEffect(() => {
@@ -53,7 +53,7 @@ export default function Loading({ play }) {
 
   return (
     <>
-      <LoadingStyles play={play}>
+      <LoadingStyles appLoading={appLoading} play={play}>
         {play ? (
           <h1>{countIn > 0 ? countIn : "Play!"}</h1>
         ) : (
