@@ -29,10 +29,17 @@ const SweetToFindStyles = styled(motion.div)`
   img {
     width: 100px;
     object-fit: cover;
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .find-next-svg {
     width: 98px;
-    margin-top: -8px;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .score-counter {
     background: var(--gold);

@@ -16,6 +16,7 @@ export default function HomeScreenOne({ data, setPagination }) {
       localStorage.getItem("music") === "true"
     ) {
       dispatch({ type: "UPDATE_AUDIO", audio: true })
+      document.getElementById("music").play()
     }
   }
 

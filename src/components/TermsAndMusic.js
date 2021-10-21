@@ -14,6 +14,10 @@ const TermsAndMusicStyles = styled.nav`
   padding: ${(props) => (props.play ? "20px" : null)};
   .button-alt {
     color: ${(props) => (props.play ? "var(--off-white)" : null)};
+    &.music-paused {
+      text-decoration: line-through;
+      text-decoration: line-through 0.2rem solid;
+    }
   }
 `
 
@@ -22,6 +26,9 @@ export default function TermsAndMusic({ play, ...rest }) {
   const dispatch = useGameDispatchContext()
 
   function handleAudioButton() {
+    audio
+      ? document.getElementById("music").pause()
+      : document.getElementById("music").play()
     dispatch({ type: "UPDATE_AUDIO", audio: !audio })
     localStorage.setItem("music", `${!audio}`)
   }
@@ -30,11 +37,8 @@ export default function TermsAndMusic({ play, ...rest }) {
     <>
       <TermsAndMusicStyles play={play} {...rest}>
         <button
-          className="button-alt"
+          className={`button-alt ${!audio ? "music-paused" : ""}`}
           onClick={handleAudioButton}
-          style={{
-            textDecoration: !audio ? "line-through 0.2rem solid" : null,
-          }}
         >
           Music
         </button>
