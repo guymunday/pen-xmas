@@ -114,21 +114,25 @@ export default function Popup({ children, ...rest }) {
             data={corner}
             type="image/svg+xml"
             className="popup-corner popup-corner-1"
+            alt="corner"
           />
           <object
             data={corner}
             type="image/svg+xml"
             className="popup-corner popup-corner-2"
+            alt="corner"
           />
           <object
             data={corner}
             type="image/svg+xml"
             className="popup-corner popup-corner-3"
+            alt="corner"
           />
           <object
             data={corner}
             type="image/svg+xml"
             className="popup-corner popup-corner-4"
+            alt="corner"
           />
           <span className="popup-fake-padding popup-fake-padding-1" />
           <span className="popup-fake-padding popup-fake-padding-2" />

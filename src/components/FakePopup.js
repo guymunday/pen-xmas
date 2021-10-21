@@ -19,26 +19,33 @@ export default function FakePopup({ loading, children, ...rest }) {
           animate={{ scale: loading ? 0 : 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="popup-content">{children}<TermsAndMusic/></div>
+          <div className="popup-content">
+            {children}
+            <TermsAndMusic />
+          </div>
           <object
             data={corner}
             type="image/svg+xml"
             className="popup-corner popup-corner-1"
+            alt="corner"
           />
           <object
             data={corner}
             type="image/svg+xml"
             className="popup-corner popup-corner-2"
+            alt="corner"
           />
           <object
             data={corner}
             type="image/svg+xml"
             className="popup-corner popup-corner-3"
+            alt="corner"
           />
           <object
             data={corner}
             type="image/svg+xml"
             className="popup-corner popup-corner-4"
+            alt="corner"
           />
           <span className="popup-fake-padding popup-fake-padding-1" />
           <span className="popup-fake-padding popup-fake-padding-2" />

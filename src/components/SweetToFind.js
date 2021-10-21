@@ -79,6 +79,7 @@ export default function SweetToFind({ image, seconds, timer, loading }) {
                   data={findNext}
                   type="image/svg+xml"
                   className="find-next-svg"
+                  alt="find next"
                 />
               </CircularProgressbarWithChildren>
               {score > 0 && (
