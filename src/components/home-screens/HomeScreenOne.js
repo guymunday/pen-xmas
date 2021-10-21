@@ -11,7 +11,12 @@ export default function HomeScreenOne({ data, setPagination }) {
 
   function handleButtonClick() {
     setPagination(1)
-    dispatch({ type: "UPDATE_AUDIO", audio: true })
+    if (
+      localStorage.getItem("music") === null ||
+      localStorage.getItem("music") === "true"
+    ) {
+      dispatch({ type: "UPDATE_AUDIO", audio: true })
+    }
   }
 
   return (

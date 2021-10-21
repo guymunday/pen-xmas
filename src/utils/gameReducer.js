@@ -9,6 +9,7 @@ let initialGameContext = {
   previous: "",
   tries: 3,
   open: "on",
+  termsUrl: "",
 }
 
 const GameStateContext = createContext(initialGameContext)
@@ -56,6 +57,12 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         tries: action.tries,
+      }
+    }
+    case "UPDATE_TERMS_URL": {
+      return {
+        ...state,
+        termsUrl: action.termsUrl,
       }
     }
     default: {

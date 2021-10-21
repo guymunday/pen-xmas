@@ -17,6 +17,7 @@ import { shuffleArray } from "../utils/shuffleArray"
 import background from "../assets/pen-xmas-background.jpg"
 import santa from "../assets/sweets/sweets-santa.png"
 import Loading from "../components/Loading"
+import TermsAndMusic from "../components/TermsAndMusic"
 
 const GameLandscapeStyles = styled(motion.div)`
   width: 100%;
@@ -26,6 +27,7 @@ const GameLandscapeStyles = styled(motion.div)`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
   .landscape-background-container {
     cursor: grab;
     position: relative;
@@ -253,6 +255,7 @@ export default function Play({ data }) {
         timer={timer}
         loading={loading}
       />
+      <TermsAndMusic play />
       {prize && !loading && <Prize data={data} startNewGame={startNewGame} />}
       {loading && <Loading play />}
     </>

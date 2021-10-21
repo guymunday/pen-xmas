@@ -4,34 +4,31 @@ import {
   useGameDispatchContext,
   useGameStateContext,
 } from "../utils/gameReducer"
-// import music from "../assets/music.mp3"
 
 const TermsAndMusicStyles = styled.nav`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  position: ${(props) => (props.play ? "fixed" : null)};
+  bottom: ${(props) => (props.play ? "0" : null)};
+  padding: ${(props) => (props.play ? "20px" : null)};
+  .button-alt {
+    color: ${(props) => (props.play ? "var(--off-white)" : null)};
+  }
 `
 
-export default function TermsAndMusic() {
-  const audioRef = React.useRef(null)
-  const { audio } = useGameStateContext()
+export default function TermsAndMusic({ play, ...rest }) {
+  const { audio, termsUrl } = useGameStateContext()
   const dispatch = useGameDispatchContext()
 
   function handleAudioButton() {
     dispatch({ type: "UPDATE_AUDIO", audio: !audio })
+    localStorage.setItem("music", `${!audio}`)
   }
-
-  React.useEffect(() => {
-    if (audio) {
-      audioRef.current.play()
-    } else {
-      audioRef.current.pause()
-    }
-  }, [audio])
 
   return (
     <>
-      <TermsAndMusicStyles>
+      <TermsAndMusicStyles play={play} {...rest}>
         <button
           className="button-alt"
           onClick={handleAudioButton}
@@ -41,10 +38,14 @@ export default function TermsAndMusic() {
         >
           Music
         </button>
-        <a href="#" className="button-alt">
+        <a
+          href={termsUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="button-alt"
+        >
           Ts & Cs
         </a>
-        <audio ref={audioRef} loop />
       </TermsAndMusicStyles>
     </>
   )

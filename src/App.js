@@ -34,6 +34,7 @@ export default function App() {
         tries: parseInt(data?.settings?.total_tries, 10),
       })
       dispatch({ type: "UPDATE_OPEN", open: data?.block?.game_on })
+      dispatch({ type: "UPDATE_TERMS_URL", termsUrl: data?.home?.link })
     }
   }, [data, loading])
 
