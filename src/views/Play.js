@@ -99,7 +99,6 @@ export default function Play({ data }) {
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/v1/start`)
       .then((res) => {
-        console.log(res)
         dispatch({
           type: "UPDATE_ID",
           id: res.data.data.id,

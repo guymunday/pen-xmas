@@ -14,17 +14,49 @@ export default function Prize({ data, startNewGame }) {
   React.useEffect(() => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/v1/end`, { id, prize })
-      .then((res) => {
-        console.log(res)
-      })
       .catch((error) => console.log(error))
   }, [])
 
   if (
     parseInt(cookies.playAttempts, 10) === 0 &&
     prize === "LOST" &&
+    previous === "LOST"
+  ) {
+    return (
+      <>
+        <Popup>
+          <h1>{data?.notries?.title2}</h1>
+          <img
+            src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.lost_desktop_image?.name}`}
+            alt="lost"
+            height="180"
+          />
+          <p>{data?.notries?.text2}</p>
+          <ContinueShoppingButton>
+            {data?.notries?.btn_text2}
+          </ContinueShoppingButton>
+          <TriesLeft />
+          <p className="terms">
+            {data?.home?.terms_text}{" "}
+            <a
+              href={data?.home?.link}
+              target="_blank"
+              rel="noopener"
+              className="terms"
+            >
+              {data?.home?.link_text}
+            </a>
+          </p>
+        </Popup>
+      </>
+    )
+  }
+
+  if (
+    parseInt(cookies.playAttempts, 10) === 0 &&
+    prize === "LOST" &&
     previous !== "LOST"
-  )
+  ) {
     return (
       <>
         <Popup>
@@ -74,66 +106,61 @@ export default function Prize({ data, startNewGame }) {
         </Popup>
       </>
     )
+  }
 
   return (
     <>
       <Popup>
         {prize === "LOST" ? (
-          <h1>{data?.result?.lost_title}</h1>
+          <>
+            <h1>{data?.result?.lost_title}</h1>
+            <img
+              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.lost_desktop_image?.name}`}
+              alt="lost"
+              height="180"
+            />
+            <p>{data?.result?.lost_text.replace("{score}", score)}</p>
+          </>
         ) : prize === "BRONZE" ? (
-          <h1>{data?.result?.bronze_title}</h1>
+          <>
+            <h1>{data?.result?.bronze_title}</h1>
+            <img
+              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.bronze_desktop_image?.name}`}
+              alt="bronze"
+              height="180"
+            />
+            <p>{data?.result?.bronze_text.replace("{score}", score)}</p>
+          </>
         ) : prize === "SILVER" ? (
-          <h1>{data?.result?.silver_title}</h1>
+          <>
+            <h1>{data?.result?.silver_title}</h1>
+            <img
+              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.silver_desktop_image?.name}`}
+              alt="silver"
+              height="180"
+            />
+            <p>{data?.result?.silver_text.replace("{score}", score)}</p>
+          </>
         ) : prize === "GOLD" ? (
-          <h1>{data?.result?.gold_title}</h1>
+          <>
+            <h1>{data?.result?.gold_title}</h1>
+            <img
+              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.gold_desktop_image?.name}`}
+              alt="gold"
+              height="180"
+            />
+            <p>{data?.result?.gold_text.replace("{score}", score)}</p>
+          </>
         ) : (
-          <h1>{data?.result?.platinum_title}</h1>
-        )}
-        {prize === "LOST" ? (
-          <img
-            src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.lost_desktop_image?.name}`}
-            alt="lost"
-            height="180"
-          />
-        ) : prize === "BRONZE" ? (
-          <img
-            src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.bronze_desktop_image?.name}`}
-            alt="bronze"
-            height="180"
-          />
-        ) : prize === "SILVER" ? (
-          <img
-            src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.silver_desktop_image?.name}`}
-            alt="silver"
-            height="180"
-          />
-        ) : prize === "GOLD" ? (
-          <img
-            src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.gold_desktop_image?.name}`}
-            alt="gold"
-            height="180"
-          />
-        ) : (
-          <img
-            src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.platinum_desktop_image?.name}`}
-            alt="platinum"
-            height="180"
-          />
-        )}
-        {prize === "LOST" && (
-          <p>{data?.result?.lost_text.replace("{score}", score)}</p>
-        )}
-        {prize === "BRONZE" && (
-          <p>{data?.result?.bronze_text.replace("{score}", score)}</p>
-        )}
-        {prize === "SILVER" && (
-          <p>{data?.result?.silver_text.replace("{score}", score)}</p>
-        )}
-        {prize === "GOLD" && (
-          <p>{data?.result?.gold_text.replace("{score}", score)}</p>
-        )}
-        {prize === "PLATINUM" && (
-          <p>{data?.result?.platinum_text.replace("{score}", score - 1)}</p>
+          <>
+            <h1>{data?.result?.platinum_title}</h1>
+            <img
+              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.platinum_desktop_image?.name}`}
+              alt="platinum"
+              height="180"
+            />
+            <p>{data?.result?.platinum_text.replace("{score}", score - 1)}</p>
+          </>
         )}
         {prize !== "LOST" && (
           <AjaxButton>{data?.result?.add_to_cart}</AjaxButton>

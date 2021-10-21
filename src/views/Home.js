@@ -38,8 +38,6 @@ export default function Home({ data }) {
     imagePromise(setLoading)
   }, [])
 
-  console.log(data)
-
   return (
     <>
       <Header />
