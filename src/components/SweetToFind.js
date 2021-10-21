@@ -15,6 +15,7 @@ const SweetToFindContainer = styled.div`
   left: 50%;
   transform: translate(-50%, 0);
   pointer-events: none;
+  user-select: none;
 `
 
 const SweetToFindStyles = styled(motion.div)`
@@ -25,6 +26,7 @@ const SweetToFindStyles = styled(motion.div)`
   padding: 10px;
   box-shadow: var(--shadow);
   pointer-events: none;
+  user-select: none;
   position: relative;
   img {
     width: 100px;
@@ -33,6 +35,8 @@ const SweetToFindStyles = styled(motion.div)`
     top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
   }
   .find-next-svg {
     width: 98px;
@@ -40,6 +44,8 @@ const SweetToFindStyles = styled(motion.div)`
     top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
   }
   .score-counter {
     background: var(--gold);
@@ -55,6 +61,8 @@ const SweetToFindStyles = styled(motion.div)`
     right: -10px;
     font-size: 20px;
     box-shadow: 2px -2px 5px 2px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    user-select: none;
   }
 `
 
