@@ -2,10 +2,8 @@ import React from "react"
 import axios from "axios"
 import { useCookies } from "react-cookie"
 import { useGameStateContext } from "../utils/gameReducer"
-import AjaxButton from "./AjaxButton"
 import Popup from "./Popup"
-import TriesLeft from "./TriesLeft"
-import ContinueShoppingButton from "./ContinueShoppingButton"
+import PrizeScreen from "./PrizeScreen"
 
 export default function Prize({ data, startNewGame }) {
   const { id, prize, previous, score } = useGameStateContext()
@@ -25,28 +23,19 @@ export default function Prize({ data, startNewGame }) {
     return (
       <>
         <Popup>
-          <h1>{data?.notries?.title2}</h1>
-          <img
-            src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.lost_desktop_image?.name}`}
-            alt="lost"
-            height="180"
+          <PrizeScreen
+            title={data?.notries?.title2}
+            image={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.lost_desktop_image?.name}`}
+            text={data?.notries?.text2}
+            button={data?.result?.add_to_cart}
+            lost
+            playAgain={data?.result?.play_again}
+            shopOn={data?.result?.shop_on}
+            startNewGame={startNewGame}
+            termsText={data?.home?.terms_text}
+            termsLinkText={data?.home?.link_text}
+            termsLink={data?.home?.link}
           />
-          <p>{data?.notries?.text2}</p>
-          <ContinueShoppingButton>
-            {data?.notries?.btn_text2}
-          </ContinueShoppingButton>
-          <TriesLeft />
-          <p className="terms">
-            {data?.home?.terms_text}{" "}
-            <a
-              href={data?.home?.link}
-              target="_blank"
-              rel="noopener"
-              className="terms"
-            >
-              {data?.home?.link_text}
-            </a>
-          </p>
         </Popup>
       </>
     )
@@ -60,49 +49,37 @@ export default function Prize({ data, startNewGame }) {
     return (
       <>
         <Popup>
-          <h1>{data?.notries?.title}</h1>
-          {previous === "BRONZE" ? (
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.bronze_desktop_image?.name}`}
-              alt="bronze"
-              height="180"
-            />
-          ) : previous === "SILVER" ? (
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.silver_desktop_image?.name}`}
-              alt="silver"
-              height="180"
-            />
-          ) : previous === "GOLD" ? (
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.gold_desktop_image?.name}`}
-              alt="gold"
-              height="180"
-            />
-          ) : (
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.platinum_desktop_image?.name}`}
-              alt="platinum"
-              height="180"
-            />
-          )}
-          <p>{data?.notries?.text}</p>
-          <AjaxButton>{data?.result?.add_to_cart}</AjaxButton>
-          <ContinueShoppingButton>
-            {data?.notries?.btn_text}
-          </ContinueShoppingButton>
-          <TriesLeft />
-          <p className="terms">
-            {data?.home?.terms_text}{" "}
-            <a
-              href={data?.home?.link}
-              target="_blank"
-              rel="noopener"
-              className="terms"
-            >
-              {data?.home?.link_text}
-            </a>
-          </p>
+          <PrizeScreen
+            title={data?.notries?.title}
+            image={
+              previous === "BRONZE"
+                ? `${process.env.REACT_APP_IMAGES_URL}/${data?.result?.bronze_desktop_image?.name}`
+                : previous === "SILVER"
+                ? `${process.env.REACT_APP_IMAGES_URL}/${data?.result?.silver_desktop_image?.name}`
+                : previous === "GOLD"
+                ? `${process.env.REACT_APP_IMAGES_URL}/${data?.result?.gold_desktop_image?.name}`
+                : `${process.env.REACT_APP_IMAGES_URL}/${data?.result?.platinum_desktop_image?.name}`
+            }
+            text={data?.notries?.text}
+            button={data?.result?.add_to_cart}
+            prize={
+              previous === "BRONZE"
+                ? "PLAY4"
+                : previous === "SILVER"
+                ? "PLAY3"
+                : previous === "GOLD"
+                ? "PLAY2"
+                : "PLAY1"
+            }
+            playAgain={data?.result?.play_again}
+            shopOn={data?.result?.shop_on}
+            startNewGame={startNewGame}
+            termsText={data?.home?.terms_text}
+            termsLinkText={data?.home?.link_text}
+            termsLink={data?.home?.link}
+            redirectMessage={data?.cart?.button_text}
+            redirectTitle={data?.cart?.above_text}
+          />
         </Popup>
       </>
     )
@@ -112,80 +89,84 @@ export default function Prize({ data, startNewGame }) {
     <>
       <Popup>
         {prize === "LOST" ? (
-          <>
-            <h1>{data?.result?.lost_title}</h1>
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.lost_desktop_image?.name}`}
-              alt="lost"
-              height="180"
-            />
-            <p>{data?.result?.lost_text.replace("{score}", score)}</p>
-          </>
+          <PrizeScreen
+            title={data?.result?.lost_title}
+            image={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.lost_desktop_image?.name}`}
+            text={data?.result?.lost_text.replace("{score}", score)}
+            button={data?.result?.add_to_cart}
+            lost
+            playAgain={data?.result?.play_again}
+            shopOn={data?.result?.shop_on}
+            startNewGame={startNewGame}
+            termsText={data?.home?.terms_text}
+            termsLinkText={data?.home?.link_text}
+            termsLink={data?.home?.link}
+          />
         ) : prize === "BRONZE" ? (
-          <>
-            <h1>{data?.result?.bronze_title}</h1>
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.bronze_desktop_image?.name}`}
-              alt="bronze"
-              height="180"
-            />
-            <p>{data?.result?.bronze_text.replace("{score}", score)}</p>
-          </>
+          <PrizeScreen
+            title={data?.result?.bronze_title}
+            image={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.bronze_desktop_image?.name}`}
+            text={data?.result?.bronze_text.replace("{score}", score)}
+            button={data?.result?.add_to_cart}
+            prize="PLAY4"
+            playAgain={data?.result?.play_again}
+            shopOn={data?.result?.shop_on}
+            startNewGame={startNewGame}
+            termsText={data?.home?.terms_text}
+            termsLinkText={data?.home?.link_text}
+            termsLink={data?.home?.link}
+            redirectMessage={data?.cart?.button_text}
+            redirectTitle={data?.cart?.above_text}
+          />
         ) : prize === "SILVER" ? (
-          <>
-            <h1>{data?.result?.silver_title}</h1>
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.silver_desktop_image?.name}`}
-              alt="silver"
-              height="180"
-            />
-            <p>{data?.result?.silver_text.replace("{score}", score)}</p>
-          </>
+          <PrizeScreen
+            title={data?.result?.silver_title}
+            image={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.silver_desktop_image?.name}`}
+            text={data?.result?.silver_text.replace("{score}", score)}
+            button={data?.result?.add_to_cart}
+            prize="PLAY3"
+            playAgain={data?.result?.play_again}
+            shopOn={data?.result?.shop_on}
+            startNewGame={startNewGame}
+            termsText={data?.home?.terms_text}
+            termsLinkText={data?.home?.link_text}
+            termsLink={data?.home?.link}
+            redirectMessage={data?.cart?.button_text}
+            redirectTitle={data?.cart?.above_text}
+          />
         ) : prize === "GOLD" ? (
-          <>
-            <h1>{data?.result?.gold_title}</h1>
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.gold_desktop_image?.name}`}
-              alt="gold"
-              height="180"
-            />
-            <p>{data?.result?.gold_text.replace("{score}", score)}</p>
-          </>
+          <PrizeScreen
+            title={data?.result?.gold_title}
+            image={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.gold_desktop_image?.name}`}
+            text={data?.result?.gold_text.replace("{score}", score)}
+            button={data?.result?.add_to_cart}
+            prize="PLAY2"
+            playAgain={data?.result?.play_again}
+            shopOn={data?.result?.shop_on}
+            startNewGame={startNewGame}
+            termsText={data?.home?.terms_text}
+            termsLinkText={data?.home?.link_text}
+            termsLink={data?.home?.link}
+            redirectMessage={data?.cart?.button_text}
+            redirectTitle={data?.cart?.above_text}
+          />
         ) : (
-          <>
-            <h1>{data?.result?.platinum_title}</h1>
-            <img
-              src={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.platinum_desktop_image?.name}`}
-              alt="platinum"
-              height="180"
-            />
-            <p>{data?.result?.platinum_text.replace("{score}", score - 1)}</p>
-          </>
+          <PrizeScreen
+            title={data?.result?.platinum_title}
+            image={`${process.env.REACT_APP_IMAGES_URL}/${data?.result?.platinum_desktop_image?.name}`}
+            text={data?.result?.platinum_text.replace("{score}", score - 1)}
+            button={data?.result?.add_to_cart}
+            prize="PLAY1"
+            playAgain={data?.result?.play_again}
+            shopOn={data?.result?.shop_on}
+            startNewGame={startNewGame}
+            termsText={data?.home?.terms_text}
+            termsLinkText={data?.home?.link_text}
+            termsLink={data?.home?.link}
+            redirectMessage={data?.cart?.button_text}
+            redirectTitle={data?.cart?.above_text}
+          />
         )}
-        {prize !== "LOST" && (
-          <AjaxButton>{data?.result?.add_to_cart}</AjaxButton>
-        )}
-        {parseInt(cookies.playAttempts, 10) >= 1 ? (
-          <button className="button" onClick={startNewGame}>
-            {data?.result?.play_again}
-          </button>
-        ) : (
-          <ContinueShoppingButton>
-            {data?.result?.shop_on}
-          </ContinueShoppingButton>
-        )}
-        <TriesLeft />
-        <p className="terms">
-          {data?.home?.terms_text}{" "}
-          <a
-            href={data?.home?.link}
-            target="_blank"
-            rel="noopener"
-            className="terms"
-          >
-            {data?.home?.link_text}
-          </a>
-        </p>
       </Popup>
     </>
   )
