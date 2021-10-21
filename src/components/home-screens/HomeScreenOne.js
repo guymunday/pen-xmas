@@ -1,8 +1,6 @@
 import React from "react"
 import { useCookies } from "react-cookie"
 import TriesLeft from "../TriesLeft"
-import badge from "../../assets/pen-badge.png"
-import emptyJar from "../../assets/empty-jar.png"
 import { useGameDispatchContext } from "../../utils/gameReducer"
 
 export default function HomeScreenOne({ data, setPagination }) {

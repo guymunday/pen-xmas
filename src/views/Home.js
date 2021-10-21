@@ -85,7 +85,7 @@ export default function Home({ data }) {
               <a
                 href={data?.home?.link}
                 target="_blank"
-                rel="noopener"
+                rel="noreferrer"
                 className="terms"
               >
                 {data?.home?.link_text}

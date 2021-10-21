@@ -1,6 +1,5 @@
 import React from "react"
 import ContinueShoppingButton from "../ContinueShoppingButton"
-import emptyJar from "../../assets/empty-jar.png"
 
 export default function HomeScreenOff({ data }) {
   return (

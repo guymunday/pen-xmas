@@ -38,6 +38,10 @@ export default function App() {
     }
   }, [data, loading])
 
+  if (error) {
+    window.location.reload()
+  }
+
   return (
     <>
       <Router>

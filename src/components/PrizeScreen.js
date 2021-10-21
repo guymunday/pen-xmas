@@ -55,7 +55,7 @@ export default function PrizeScreen({
             <a
               href={termsLink}
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
               className="terms"
             >
               {termsLinkText}
